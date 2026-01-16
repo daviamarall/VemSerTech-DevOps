@@ -1,139 +1,189 @@
-**-- SELECT: Recupera dados de uma ou mais tabelas.**
+Colinha SQL
 
-`SELECT column1, column2 FROM table WHERE condition;`
+---
 
-**-- FROM: Especifica a tabela da qual os dados são recuperados.**
+## 📌 **SELECT – Consulta de Dados**
 
-`SELECT column1, column2 FROM table;`
+### Estrutura básica
 
-**-- WHERE: Filtra os resultados com base em uma condição.**
+```sql
+SELECT coluna1, coluna2
+FROM tabela
+WHERE condicao;
+```
 
-`SELECT column1, column2 FROM table WHERE condition;`
+### ORDER BY – Ordenação
 
-**-- ORDER BY: Classifica os resultados por uma ou mais colunas.**
+```sql
+SELECT coluna1, coluna2
+FROM tabela
+ORDER BY coluna1 ASC; -- ASC | DESC
+```
 
-`SELECT column1, column2 FROM table ORDER BY column1 ASC;`
+### DISTINCT – Valores únicos
 
-**-- GROUP BY: Agrupa os resultados com base em uma ou mais colunas.**
+```sql
+SELECT DISTINCT coluna1
+FROM tabela;
+```
 
-`SELECT column1, COUNT(*) FROM table GROUP BY column1;`
+---
 
-**-- HAVING: Filtra os resultados de uma cláusula GROUP BY com base em uma condição.**
+## 📊 **Funções de Agregação**
 
-`SELECT column1, COUNT(*) FROM table GROUP BY column1 HAVING COUNT(*) > 1;`
+```sql
+-- Máximo
+SELECT MAX(coluna2) AS max_value FROM tabela;
 
-**-- JOIN: Combina linhas de duas ou mais tabelas com base em uma condição relacionada.**
+-- Mínimo
+SELECT MIN(coluna2) AS min_value FROM tabela;
 
-`SELECT column1, column2 FROM table1 INNER JOIN table2 ON table1.id = table2.id;`
+-- Média
+SELECT AVG(coluna2) AS average_value FROM tabela;
 
-**-- LEFT JOIN (ou LEFT OUTER JOIN): Retorna todos os registros da tabela à esquerda e os registros correspondentes da tabela à direita. Se não houver correspondência, os resultados da tabela à direita conterão valores nulos.**
+-- Soma
+SELECT SUM(coluna2) AS sum_value FROM tabela;
 
-`SELECT column1, column2 FROM table1 LEFT JOIN table2 ON table1.id = table2.id;`
+-- Contagem
+SELECT COUNT(*) AS record_count FROM tabela;
+```
 
-**-- RIGHT JOIN (ou RIGHT OUTER JOIN): Retorna todos os registros da tabela à direita e os registros correspondentes da tabela à esquerda. Se não houver correspondência, os resultados da tabela à esquerda conterão valores nulos.**
+---
 
-`SELECT column1, column2 FROM table1 RIGHT JOIN table2 ON table1.id = table2.id;
-`
+## 📦 **GROUP BY & HAVING**
 
-**-- FULL JOIN (ou FULL OUTER JOIN): Retorna todos os registros quando há uma correspondência em uma das tabelas. Os registros não correspondentes nas tabelas à esquerda e à direita conterão valores nulos.**
+### GROUP BY – Agrupamento
 
-`SELECT column1, column2 FROM table1 FULL JOIN table2 ON table1.id = table2.id;`
+```sql
+SELECT coluna1, COUNT(*)
+FROM tabela
+GROUP BY coluna1;
+```
 
-**-- CROSS JOIN: Retorna o produto cartesiano de ambas as tabelas, ou seja, combina cada linha da tabela à esquerda com cada linha da tabela à direita.**
+### HAVING – Filtro pós-agrupamento
 
-`SELECT column1, column2 FROM table1 CROSS JOIN table2;`
+```sql
+SELECT coluna1, COUNT(*)
+FROM tabela
+GROUP BY coluna1
+HAVING COUNT(*) > 1;
+```
 
-**-- DISTINCT: Retorna valores distintos de uma coluna.**
+---
 
-`SELECT DISTINCT column1 FROM table;
-`
+## 🔗 **JOINs – Relacionamento entre Tabelas**
 
-**-- Exemplo com MAX: Retorna o valor máximo da coluna2 da tabela.**
+### INNER JOIN
 
-`SELECT MAX(column2) AS max_value FROM table;`
+```sql
+SELECT t1.coluna1, t2.coluna2
+FROM tabela1 t1
+INNER JOIN tabela2 t2 ON t1.id = t2.id;
+```
 
-**-- Exemplo com MIN: Retorna o valor mínimo da coluna2 da tabela.**
+### LEFT JOIN
 
-`SELECT MIN(column2) AS min_value FROM table;`
+```sql
+SELECT t1.coluna1, t2.coluna2
+FROM tabela1 t1
+LEFT JOIN tabela2 t2 ON t1.id = t2.id;
+```
 
-**-- Exemplo com AVG: Retorna a média da coluna2 da tabela.**
+### RIGHT JOIN
 
-`SELECT AVG(column2) AS average_value FROM table;`
+```sql
+SELECT t1.coluna1, t2.coluna2
+FROM tabela1 t1
+RIGHT JOIN tabela2 t2 ON t1.id = t2.id;
+```
 
-**-- Exemplo com SUM: Retorna a soma da coluna2 da tabela.**
+### FULL JOIN
 
-`SELECT SUM(column2) AS sum_value FROM table;`
+```sql
+SELECT t1.coluna1, t2.coluna2
+FROM tabela1 t1
+FULL JOIN tabela2 t2 ON t1.id = t2.id;
+```
 
-**-- Exemplo com COUNT: Retorna o número de registros na tabela.**
+### CROSS JOIN
 
-`SELECT COUNT(*) AS record_count FROM table;`
+```sql
+SELECT t1.coluna1, t2.coluna2
+FROM tabela1 t1
+CROSS JOIN tabela2 t2;
+```
 
-**-- Exemplo com JOIN e Igual: Combina linhas de duas tabelas onde a coluna1 é igual.**
+---
 
-SELECT table1.column1, table1.column2, table2.column2
-FROM table1
-JOIN table2 ON table1.column1 = table2.column1;
+## 🧱 **CRUD – Manipulação de Dados**
 
-### CRUD
+### INSERT
 
-**-- INSERT INTO: Insere novas linhas em uma tabela.**
+```sql
+INSERT INTO tabela (coluna1, coluna2)
+VALUES (valor1, valor2);
+```
 
-`INSERT INTO table (column1, column2) VALUES (value1, value2);`
+### UPDATE
 
-**-- UPDATE: Atualiza dados existentes em uma tabela.**
+```sql
+UPDATE tabela
+SET coluna1 = valor1
+WHERE condicao;
+```
 
-`UPDATE table SET column1 = value1 WHERE condition;`
+### DELETE
 
-**-- DELETE FROM: Exclui linhas de uma tabela.**
+```sql
+DELETE FROM tabela
+WHERE condicao;
+```
 
-`DELETE FROM table WHERE condition;`
+---
 
-### Condições 
+## 🔍 **Condições (WHERE)**
 
-**-- Igual: Retorna registros onde o valor da coluna1 é igual a 'valor'.**
+### Comparações
 
-`SELECT column1, column2 FROM table WHERE column1 = 'valor';`
+```sql
+-- Igual
+WHERE coluna1 = 'valor'
 
-**-- Diferente: Retorna registros onde o valor da coluna1 é diferente de 'valor'.**
+-- Diferente
+WHERE coluna1 <> 'valor'
 
-`SELECT column1, column2 FROM table WHERE column1 <> 'valor';`
+-- Maior / Menor
+WHERE coluna1 > 5
+WHERE coluna1 < 10
 
-**-- Maior que: Retorna registros onde o valor da coluna1 é maior que 5.**
+-- Maior ou igual / Menor ou igual
+WHERE coluna1 >= 10
+WHERE coluna1 <= 20
+```
 
-`SELECT column1, column2 FROM table WHERE column1 > 5;`
+### IN / NOT IN
 
-**-- Menor que: Retorna registros onde o valor da coluna1 é menor que 10.**
+```sql
+WHERE coluna1 IN ('valor1', 'valor2', 'valor3');
+WHERE coluna1 NOT IN ('valor1', 'valor2', 'valor3');
+```
 
-`SELECT column1, column2 FROM table WHERE column1 < 10;`
+### LIKE – Padrões
 
-**-- Maior ou igual: Retorna registros onde o valor da coluna1 é maior ou igual a 10.**
+```sql
+WHERE coluna1 LIKE 'prefixo%';
+WHERE coluna1 LIKE '%texto%';
+```
 
-`SELECT column1, column2 FROM table WHERE column1 >= 10;`
+### BETWEEN
 
-**-- Menor ou igual: Retorna registros onde o valor da coluna1 é menor ou igual a 20.**
+```sql
+WHERE coluna1 BETWEEN 10 AND 20;
+```
 
-`SELECT column1, column2 FROM table WHERE column1 <= 20;`
+### NULL
 
-**-- IN: Retorna registros onde o valor da coluna1 está em um conjunto específico.**
-
-`SELECT column1, column2 FROM table WHERE column1 IN ('valor1', 'valor2', 'valor3');`
-
-**-- NOT IN: Retorna registros onde o valor da coluna1 não está em um conjunto específico.**
-
-`SELECT column1, column2 FROM table WHERE column1 NOT IN ('valor1', 'valor2', 'valor3');`
-
-**-- LIKE: Retorna registros onde o valor da coluna1 corresponde a um padrão ('prefixo%').**
-
-`SELECT column1, column2 FROM table WHERE column1 LIKE 'prefixo%';`
-
-**-- BETWEEN: Retorna registros onde o valor da coluna1 está entre 10 e 20.**
-
-`SELECT column1, column2 FROM table WHERE column1 BETWEEN 10 AND 20;`
-
-**-- IS NULL: Retorna registros onde o valor da coluna1 é nulo.**
-
-`SELECT column1, column2 FROM table WHERE column1 IS NULL;`
-
-**-- IS NOT NULL: Retorna registros onde o valor da coluna1 não é nulo.**
-
-`SELECT column1, column2 FROM table WHERE column1 IS NOT NULL;`
+```sql
+WHERE coluna1 IS NULL;
+WHERE coluna1 IS NOT NULL;
+```
